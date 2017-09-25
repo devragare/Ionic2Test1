@@ -13,7 +13,8 @@ import { DataProvider } from '../providers/data/data';
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    HomePage
   ],
   imports: [
     BrowserModule,
@@ -22,7 +23,8 @@ import { DataProvider } from '../providers/data/data';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    HomePage
   ],
   providers: [
     StatusBar,
