@@ -11,7 +11,24 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  HELLO
 
+<ion-content padding>
+  <ion-list no-lines>
+    <ion-item-sliding>
+      <button ion-item (click)="viewChecklist(checklist)">
+        TITLE GOES HERE
+        <span>0 items</span>
+      </button>
+      <ion-item-options>
+        <button ion-button icon-only color="light" (click)="renameChecklist(checklist)">
+          <ion-icon name="clipboard"></ion-icon>
+          Edit
+        </button>
+        <button ion-button icon-only color="danger" (click)="removeChecklist(checklist)">
+          <ion-icon name="trash"></ion-icon>
+          Delete 
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
