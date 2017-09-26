@@ -13,11 +13,33 @@ export class HomePage {
   checklists: ChecklistModel[] = [];
 
   constructor(public nav: NavController, public dataService: DataProvider,
-    public alertCtrl: AlertController, public platform: Platform, keyboard: Keyboard) {
+    public alertCtrl: AlertController, public platform: Platform, public keyboard: Keyboard) {
 
   }
 
   ionViewDidLoad() {
+    this.platform.ready().then(() => {
+      this.dataService.getData().then((checklists) => {
+        console.log("Cheklists --> ", checklists);
+        let savedChecklists: any = false;
+        if (typeof (checklists) != 'undefined') {
+          savedChecklists = JSON.parse(checklists);
+          console.log("Saved checklists --> ", savedChecklists);
+        }
+        if (savedChecklists) {
+          savedChecklists.forEach((savedChecklist) => {
+
+            let loadChecklist = new ChecklistModel(savedChecklist.title, savedChecklist.items);
+            this.checklists.push(loadChecklist);
+
+            loadChecklist.checklistUpdates().subscribe(update => {
+              this.save();
+            });
+
+          });
+        }
+      })
+    });
   }
 
   addChecklist(): void {
@@ -88,6 +110,8 @@ export class HomePage {
   }
 
   save(): void {
+    this.keyboard.close();
+    this.dataService.save(this.checklists);
   }
 
 }
