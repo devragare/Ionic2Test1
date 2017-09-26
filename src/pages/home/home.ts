@@ -12,7 +12,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 export class HomePage {
   checklists: ChecklistModel[] = [];
 
-  constructor(public navCtrl: NavController, public dataService: DataProvider,
+  constructor(public nav: NavController, public dataService: DataProvider,
     public alertCtrl: AlertController, public platform: Platform, keyboard: Keyboard) {
 
   }
@@ -74,7 +74,7 @@ export class HomePage {
   }
 
   viewChecklist(checklist): void {
-    this.navCtrl.push('ChecklistPage', {
+    this.nav.push('ChecklistPage', {
       checklist: checklist
     });
   }
