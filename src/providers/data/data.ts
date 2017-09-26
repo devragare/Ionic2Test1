@@ -4,15 +4,18 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class DataProvider {
 
-  constructor(public storage: Storage) {
+  constructor(public storage: Storage){
+
   }
 
   getData(): Promise<any> {
-    return this.storage.get('checklists');
+    return this.storage.get('checklists');  
   }
 
   save(data): void {
+
     let saveData = [];
+
     //Remove observables
     data.forEach((checklist) => {
       saveData.push({
@@ -20,9 +23,8 @@ export class DataProvider {
         items: checklist.items
       });
     });
+
     let newData = JSON.stringify(saveData);
     this.storage.set('checklists', newData);
-    console.log('Saving to Storage');
   }
-
 }

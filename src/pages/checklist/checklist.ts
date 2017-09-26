@@ -4,77 +4,84 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 @IonicPage()
 @Component({
   selector: 'page-checklist',
-  templateUrl: 'checklist.html',
+  templateUrl: 'checklist.html'
 })
 export class ChecklistPage {
-  checklist: any;
 
-  constructor(public nav: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
-    this.checklist = this.navParams.get('checklist');
-  }
+	checklist: any;
 
-  addItem(): void {
-    let prompt = this.alertCtrl.create({
-      title: 'Add Item',
-      message: 'Enter the name of the task for this checklist below:',
-      inputs: [
-        {
-          name: 'name'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel'
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            this.checklist.addItem(data.name);
-          }
-        }
-      ]
-    });
-    prompt.present();
-  }
+	constructor(public nav: NavController, public navParams: NavParams, public alertCtrl: AlertController){
+		this.checklist = this.navParams.get('checklist');
+	}
 
-  toggleItem(item): void {
-    this.checklist.toggleItem(item);
-  }
+	addItem(): void {
 
-  removeItem(item): void {
-    this.checklist.removeItem(item);
-  }
+	    let prompt = this.alertCtrl.create({
+	      title: 'Add Item',
+	      message: 'Enter the name of the task for this checklist below:',
+	      inputs: [
+	        {
+	          name: 'name'
+	        }
+	      ],
+	      buttons: [
+	        {
+	          text: 'Cancel'
+	        },
+	        {
+	          text: 'Save',
+	          handler: data => {
+		 		       this.checklist.addItem(data.name);
+	          }
+	        }
+	      ]
+	    });
 
-  renameItem(item): void {
-    let prompt = this.alertCtrl.create({
-      title: 'Rename Item',
-      message: 'Enter the new name of the task for this checklist below:',
-      inputs: [
-        {
-          name: 'name'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel'
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            this.checklist.renameItem(item, data.name);
-          }
-        }
-      ]
-    });
-    prompt.present();
-  }
+	    prompt.present();
 
-  uncheckItems(): void {
-    this.checklist.items.forEach((item) => {
-      if (item.checked) {
-        this.checklist.toggleItem(item);
-      }
-    });
-  }
+	}
+
+	toggleItem(item): void {
+		this.checklist.toggleItem(item);
+	}
+
+	removeItem(item): void {
+		this.checklist.removeItem(item);
+	}
+
+	renameItem(item): void {
+
+	    let prompt = this.alertCtrl.create({
+	      title: 'Rename Item',
+	      message: 'Enter the new name of the task for this checklist below:',
+	      inputs: [
+	        {
+	          name: 'name'
+	        }
+	      ],
+	      buttons: [
+	        {
+	          text: 'Cancel'
+	        },
+	        {
+	          text: 'Save',
+	          handler: data => {
+		 		this.checklist.renameItem(item, data.name);
+	          }
+	        }
+	      ]
+	    });
+
+	    prompt.present();
+
+	}
+
+	uncheckItems(): void {
+		this.checklist.items.forEach((item) => {
+			if(item.checked){
+				this.checklist.toggleItem(item);
+			}
+		});
+	}
 
 }

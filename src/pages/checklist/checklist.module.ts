@@ -9,5 +9,8 @@ import { ChecklistPage } from './checklist';
   imports: [
     IonicPageModule.forChild(ChecklistPage),
   ],
+  exports: [
+    ChecklistPage
+  ]
 })
 export class ChecklistPageModule {}
